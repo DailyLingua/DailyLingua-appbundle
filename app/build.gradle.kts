@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.dailylingua"
+    namespace = "com.kutayeter.dailylingua"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.dailylingua"
+        applicationId = "com.kutayeter.dailylingua"
         minSdk = 27
         targetSdk = 36
         versionCode = 1
@@ -43,6 +43,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.11.0")
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
