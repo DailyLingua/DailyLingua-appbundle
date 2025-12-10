@@ -171,9 +171,10 @@ class QuizActivity : AppCompatActivity() {
             btn.isEnabled = true
             btn.setOnClickListener {
                 optionButtons.forEach { it.isEnabled = false }
-                if (btn.text.toString() == q.correct) {
+                val isCorrect = QuizLogic.isCorrectSelection(btn.text.toString(), q.correct)
+                if (isCorrect) {
                     btn.setBackgroundColor(Color.parseColor("#4CAF50"))
-                    score++
+                    score = QuizLogic.updatedScore(score, true)
                     // play correct sound if available
                     if (soundPool != null && soundCorrectId != 0) {
                         soundPool?.play(soundCorrectId, 1f, 1f, 1, 0, 1f)
@@ -204,14 +205,14 @@ class QuizActivity : AppCompatActivity() {
                         soundPool?.play(soundWrongId, 1f, 1f, 1, 0, 1f)
                     }
                 }
-                
+
                 // Cümlenin çevirisini göster
                 tvQuestion.text = "${q.example}\n\n${q.exampleTranslation}"
             }
         }
 
         btnNext.setOnClickListener {
-            currentIndex++
+            currentIndex = QuizLogic.nextIndex(currentIndex)
             showQuestion()
         }
 

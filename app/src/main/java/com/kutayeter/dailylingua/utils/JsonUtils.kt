@@ -6,11 +6,20 @@ import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
+import java.io.InputStream
 
 object JsonUtils {
     private val gson = Gson()
 
     data class WordsContainer(val words: List<Word>)
+
+    /**
+     * Helper used in unit tests to parse a JSON stream without Android assets.
+     */
+    fun parseWords(stream: InputStream): List<Word> {
+        val json = stream.bufferedReader().use { it.readText() }
+        return parseJsonString(json)
+    }
 
     fun loadWordsFromAssets(context: Context, fileName: String): List<Word> {
         val actualFile = when (fileName) {
@@ -31,6 +40,10 @@ object JsonUtils {
             }
         }
 
+        return parseJsonString(json)
+    }
+
+    private fun parseJsonString(json: String): List<Word> {
         return try {
             val type = object : TypeToken<WordsContainer>() {}.type
             val container: WordsContainer = gson.fromJson(json, type)

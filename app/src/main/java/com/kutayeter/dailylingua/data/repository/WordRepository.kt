@@ -5,14 +5,21 @@ import com.kutayeter.dailylingua.data.model.Word
 import com.kutayeter.dailylingua.utils.JsonUtils
 import java.time.LocalDate
 
-class WordRepository(private val context: Context, private val language: String) {
+class WordRepository(
+    private val context: Context,
+    private val language: String,
+    private val wordsOverride: List<Word>? = null
+) {
 
     private val words: List<Word> by lazy {
-        JsonUtils.loadWordsFromAssets(context, when(language){
-            "de" -> "words_de.json"
-            "ru" -> "words_ru.json"
-            else -> "words_en.json"
-        })
+        wordsOverride ?: JsonUtils.loadWordsFromAssets(
+            context,
+            when (language) {
+                "de" -> "words_de.json"
+                "ru" -> "words_ru.json"
+                else -> "words_en.json"
+            }
+        )
     }
 
     fun allWords(): List<Word> = words
