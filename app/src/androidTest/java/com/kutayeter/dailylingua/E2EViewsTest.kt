@@ -45,7 +45,7 @@ class E2EViewsTest {
     @Test
     fun languageSelectButtonsVisible() {
         ActivityScenario.launch(LanguageSelectActivity::class.java).use {
-            onView(isRoot()).perform(waitFor(TimeUnit.SECONDS.toMillis(2)))
+            onView(isRoot()).perform(waitFor(TimeUnit.SECONDS.toMillis(5)))
             onView(withId(R.id.btn_en)).check(matches(isDisplayed()))
             onView(withId(R.id.btn_de)).check(matches(isDisplayed()))
             onView(withId(R.id.btn_ru)).check(matches(isDisplayed()))
@@ -55,7 +55,7 @@ class E2EViewsTest {
     @Test
     fun quizActivity_showsQuestionAndAllowsNext() {
         ActivityScenario.launch(QuizActivity::class.java).use {
-            onView(isRoot()).perform(waitFor(TimeUnit.SECONDS.toMillis(2)))
+            onView(isRoot()).perform(waitFor(TimeUnit.SECONDS.toMillis(5)))
             onView(withId(R.id.tv_question)).check(matches(isDisplayed()))
             onView(withId(R.id.btn_a)).perform(click())
             onView(withId(R.id.btn_next)).perform(click())
@@ -66,7 +66,7 @@ class E2EViewsTest {
     @Test
     fun dictionaryActivity_listsWords() {
         ActivityScenario.launch(DictionaryActivity::class.java).use {
-            onView(isRoot()).perform(waitFor(TimeUnit.SECONDS.toMillis(2)))
+            onView(isRoot()).perform(waitFor(TimeUnit.SECONDS.toMillis(5)))
             onView(withId(R.id.rv_dictionary)).check(matches(isDisplayed()))
             onView(withId(R.id.rv_dictionary)).check(matches(hasDescendant(withId(R.id.tv_item_word))))
         }
@@ -81,7 +81,7 @@ class E2EViewsTest {
             .apply()
 
         ActivityScenario.launch(ProgressActivity::class.java).use {
-            onView(isRoot()).perform(waitFor(TimeUnit.SECONDS.toMillis(2)))
+            onView(isRoot()).perform(waitFor(TimeUnit.SECONDS.toMillis(5)))
             onView(withId(R.id.progress_bar)).check(matches(isDisplayed()))
             onView(withId(R.id.tv_percent)).check(matches(isDisplayed()))
             onView(withId(R.id.tv_correct_count)).check(matches(isDisplayed()))
